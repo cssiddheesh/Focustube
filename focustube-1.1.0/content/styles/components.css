@@ -1,0 +1,169 @@
+/* Styles for FocusTube's own UI, loaded inside shadow roots (isolated from YouTube's CSS). */
+
+[hidden] { display: none !important; }
+*, *::before, *::after { box-sizing: border-box; }
+button, input, textarea { font: inherit; }
+
+/* ---------- Toolbar toggle (Feature 1) ---------- */
+:host(#focustube-toggle) {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 8px;
+}
+.ft-toggle {
+  height: 36px;
+  padding: 0 16px;
+  border: 2px solid var(--ft-pumpkin);
+  border-radius: 18px;
+  background: transparent;
+  color: var(--yt-spec-text-primary, #0f0f0f);
+  font-family: var(--ft-font-ui);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+.ft-toggle:hover { background: rgba(250, 131, 52, 0.14); }
+.ft-toggle[data-state="on"] { border-color: var(--ft-cyan); }
+.ft-toggle[data-state="on"]:hover { background: rgba(56, 134, 151, 0.16); }
+.ft-toggle:focus-visible { outline: 2px solid var(--ft-canary); outline-offset: 2px; }
+
+/* ---------- Focus homepage (Features 2 and 3) ---------- */
+:host(#focustube-home) {
+  position: fixed;
+  inset: 56px 0 0 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: auto;
+  background: var(--ft-violet);
+  color: #fff;
+}
+.ft-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: min(720px, 100%);
+  text-align: center;
+}
+.ft-brand {
+  margin: 0;
+  font-family: var(--ft-font-ui);
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 400;
+  color: var(--ft-pumpkin);
+}
+.ft-tagline {
+  margin: 0;
+  font-family: var(--ft-font-ui);
+  font-size: 14px;
+  color: var(--ft-jasmine);
+}
+.ft-quote {
+  width: 100%;
+  margin: 8px 0;
+  padding: 24px 28px;
+  border-radius: 12px;
+  background: var(--ft-jasmine);
+  color: var(--ft-violet);
+  font-family: var(--ft-font-quote);
+}
+.ft-quote blockquote { margin: 0; font-size: clamp(18px, 2.6vw, 24px); line-height: 1.45; }
+.ft-quote figcaption { margin-top: 12px; font-size: 14px; opacity: 0.8; }
+.ft-search { display: flex; gap: 8px; width: 100%; }
+.ft-search input {
+  flex: 1;
+  height: 48px;
+  padding: 0 20px;
+  border: 2px solid var(--ft-pumpkin);
+  border-radius: 24px;
+  background: #fff;
+  color: #0f0f0f;
+  font-size: 16px;
+}
+.ft-search input:focus { outline: 2px solid var(--ft-canary); outline-offset: 2px; }
+.ft-search button {
+  height: 48px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 24px;
+  background: var(--ft-pumpkin);
+  color: var(--ft-violet);
+  font-family: var(--ft-font-ui);
+  cursor: pointer;
+}
+.ft-search button:focus-visible { outline: 2px solid var(--ft-canary); outline-offset: 2px; }
+.ft-attrib { margin: 0; font-size: 12px; color: rgba(255, 255, 255, 0.6); }
+.ft-attrib a { color: var(--ft-jasmine); }
+
+/* ---------- Watch page dock: notes + timer (Features 6 and 9) ---------- */
+:host(#focustube-dock) {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2000;
+  font-family: var(--ft-font-ui);
+  font-size: 13px;
+}
+.ft-dock { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.ft-panel {
+  width: 320px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  background: var(--ft-violet);
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+}
+.ft-panel-head, .ft-panel-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ft-panel-head { margin-bottom: 8px; color: var(--ft-jasmine); }
+.ft-panel textarea {
+  display: block;
+  width: 100%;
+  height: 180px;
+  padding: 10px;
+  resize: vertical;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-family: system-ui, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.ft-panel textarea:focus { outline: 2px solid var(--ft-pumpkin); outline-offset: 1px; }
+.ft-panel-foot { margin-top: 8px; }
+.ft-status { font-size: 12px; color: rgba(255, 255, 255, 0.65); }
+.ft-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px 6px 14px;
+  border-radius: 22px;
+  background: var(--ft-violet);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+.ft-timer { min-width: 92px; font-variant-numeric: tabular-nums; }
+.ft-notice {
+  max-width: 320px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--ft-cyan);
+  color: #fff;
+}
+.ft-btn, .ft-icon {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  background: transparent;
+  color: #fff;
+  font-family: var(--ft-font-ui);
+  cursor: pointer;
+}
+.ft-btn { height: 32px; padding: 0 12px; }
+.ft-btn:hover, .ft-icon:hover { background: rgba(255, 255, 255, 0.12); }
+.ft-btn.ft-primary { border-color: transparent; background: var(--ft-pumpkin); color: var(--ft-violet); }
+.ft-icon { width: 28px; height: 28px; padding: 0; font-size: 18px; line-height: 1; }
+.ft-btn:focus-visible, .ft-icon:focus-visible { outline: 2px solid var(--ft-canary); outline-offset: 2px; }

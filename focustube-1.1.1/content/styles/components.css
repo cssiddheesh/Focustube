@@ -1,0 +1,186 @@
+/* Styles for FocusTube's own UI, loaded inside shadow roots (isolated from YouTube's CSS). */
+
+[hidden] { display: none !important; }
+*, *::before, *::after { box-sizing: border-box; }
+button, input, textarea { font: inherit; }
+
+/* ---------- Toolbar toggle (Feature 1) ---------- */
+:host(#focustube-toggle) {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 16px 0 8px;
+}
+.ft-toggle {
+  height: 36px;
+  padding: 0 18px;
+  border: 2px solid var(--ft-pumpkin);
+  border-radius: 18px;
+  background: var(--ft-violet);
+  color: #fff;
+  font-family: var(--ft-font-ui);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+.ft-toggle:hover { background: #3a1a4a; }
+.ft-toggle[data-state="on"] { border-color: var(--ft-cyan); }
+.ft-toggle:focus-visible { outline: 2px solid var(--ft-canary); outline-offset: 2px; }
+
+/* ---------- Focus homepage (Features 2 and 3) ---------- */
+:host(#focustube-home) {
+  --home-bg: var(--ft-violet);
+  --home-fg: #fff;
+  --home-brand: var(--ft-pumpkin);
+  --home-accent: var(--ft-jasmine);
+  --home-muted: rgba(255, 255, 255, 0.55);
+  --home-card-bg: var(--ft-jasmine);
+  --home-card-fg: var(--ft-violet);
+  --home-brand-font: var(--ft-font-redaction);
+  --home-quote-size: 16px;
+
+  position: fixed;
+  inset: 56px 0 0 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  background: var(--home-bg);
+  color: var(--home-fg);
+}
+:host(#focustube-home[data-theme="charcoal"]) {
+  --home-bg: #121212;
+  --home-card-bg: #232323;
+  --home-card-fg: #f1f1f1;
+}
+:host(#focustube-home[data-theme="paper"]) {
+  --home-bg: #fbf6e9;
+  --home-fg: #271033;
+  --home-brand: #c85a0f;
+  --home-accent: #271033;
+  --home-muted: rgba(39, 16, 51, 0.6);
+  --home-card-bg: #ffe882;
+}
+:host(#focustube-home[data-theme="ocean"]) {
+  --home-bg: #0f2a31;
+  --home-brand: var(--ft-jasmine);
+  --home-card-bg: var(--ft-cyan);
+  --home-card-fg: #fff;
+}
+:host(#focustube-home[data-font="audiowide"]) { --home-brand-font: var(--ft-font-ui); }
+:host(#focustube-home[data-font="serif"]) { --home-brand-font: var(--ft-font-quote); }
+:host(#focustube-home[data-qsize="medium"]) { --home-quote-size: 20px; }
+:host(#focustube-home[data-qsize="large"]) { --home-quote-size: 26px; }
+
+.ft-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: min(640px, calc(100% - 48px));
+  margin: auto;
+  padding: 24px 0;
+  text-align: center;
+}
+.ft-brand {
+  margin: 0;
+  font-family: var(--home-brand-font);
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--home-brand);
+}
+.ft-tagline { margin: 0; font-family: var(--ft-font-ui); font-size: 12px; color: var(--home-accent); opacity: 0.85; }
+.ft-quote {
+  width: 100%;
+  margin: 4px 0 0;
+  padding: 14px 20px;
+  border-radius: 10px;
+  background: var(--home-card-bg);
+  color: var(--home-card-fg);
+  font-family: var(--ft-font-quote);
+}
+.ft-quote blockquote { margin: 0; font-size: var(--home-quote-size); line-height: 1.45; }
+.ft-quote figcaption { margin-top: 8px; font-size: 12px; opacity: 0.75; }
+:host(#focustube-home[data-qstyle="plain"]) .ft-quote {
+  padding: 0;
+  background: transparent;
+  color: var(--home-fg);
+  opacity: 0.9;
+}
+
+/* Reserved space: YouTube's own search bar is positioned over this box (see focus.css). */
+.ft-search-slot { width: min(560px, 100%); height: 40px; margin-top: 8px; }
+
+.ft-footer {
+  padding: 10px 16px 12px;
+  text-align: center;
+  font-family: system-ui, "Segoe UI", sans-serif;
+  font-size: 11px;
+  color: var(--home-muted);
+}
+.ft-footer a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.ft-footer a:hover { color: var(--home-fg); }
+
+/* ---------- Watch page dock: notes + timer (Features 6 and 9) ---------- */
+:host(#focustube-dock) {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2000;
+  font-family: var(--ft-font-ui);
+  font-size: 13px;
+}
+.ft-dock { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.ft-panel {
+  width: 320px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  background: var(--ft-violet);
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+}
+.ft-panel-head, .ft-panel-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ft-panel-head { margin-bottom: 8px; color: var(--ft-jasmine); }
+.ft-panel textarea {
+  display: block;
+  width: 100%;
+  height: 180px;
+  padding: 10px;
+  resize: vertical;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-family: system-ui, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.ft-panel textarea:focus { outline: 2px solid var(--ft-pumpkin); outline-offset: 1px; }
+.ft-panel-foot { margin-top: 8px; }
+.ft-status { font-size: 12px; color: rgba(255, 255, 255, 0.65); }
+.ft-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px 6px 14px;
+  border-radius: 22px;
+  background: var(--ft-violet);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+.ft-timer { min-width: 92px; font-variant-numeric: tabular-nums; }
+.ft-notice { max-width: 320px; padding: 8px 12px; border-radius: 8px; background: var(--ft-cyan); color: #fff; }
+.ft-btn, .ft-icon {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  background: transparent;
+  color: #fff;
+  font-family: var(--ft-font-ui);
+  cursor: pointer;
+}
+.ft-btn { height: 32px; padding: 0 12px; }
+.ft-btn:hover, .ft-icon:hover { background: rgba(255, 255, 255, 0.12); }
+.ft-btn.ft-primary { border-color: transparent; background: var(--ft-pumpkin); color: var(--ft-violet); }
+.ft-icon { width: 28px; height: 28px; padding: 0; font-size: 18px; line-height: 1; }
+.ft-btn:focus-visible, .ft-icon:focus-visible { outline: 2px solid var(--ft-canary); outline-offset: 2px; }

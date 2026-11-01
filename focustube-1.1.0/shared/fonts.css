@@ -1,0 +1,20 @@
+/*
+ * Optional bundled fonts. Drop the files listed in assets/fonts/README.md
+ * next to each other and they are used automatically; otherwise the
+ * fallback stacks from tokens.css apply (Georgia / Segoe UI).
+ * Installed copies of the fonts are preferred via local().
+ */
+@font-face {
+  font-family: "Audiowide";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Audiowide"), local("Audiowide-Regular"), url("../assets/fonts/Audiowide-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Young Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local("Young Serif"), local("YoungSerif-Regular"), url("../assets/fonts/YoungSerif-Regular.woff2") format("woff2");
+}

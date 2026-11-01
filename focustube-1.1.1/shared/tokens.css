@@ -1,0 +1,12 @@
+/* Design tokens (PRD sections 6 and 7). Shared by popup and on-page UI. */
+:root,
+:host {
+  --ft-pumpkin: #fa8334;
+  --ft-canary: #fffd77;
+  --ft-jasmine: #ffe882;
+  --ft-cyan: #388697;
+  --ft-violet: #271033;
+  --ft-font-quote: "Young Serif", Georgia, serif;
+  --ft-font-ui: "Audiowide", "Segoe UI", sans-serif;
+  --ft-font-redaction: "Redaction 35", Georgia, serif;
+}

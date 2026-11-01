@@ -1,0 +1,103 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extName__",
+  "short_name": "FocusTube",
+  "version": "1.1.0",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "author": "C S Siddheesh",
+  "homepage_url": "https://cssiddheesh.in",
+  "minimum_chrome_version": "121",
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "32": "assets/icons/icon-32.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "__MSG_actionTitle__",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "assets/icons/icon-16.png",
+      "32": "assets/icons/icon-32.png"
+    }
+  },
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "scripts": [
+      "shared/browser-api.js",
+      "shared/constants.js",
+      "shared/dates.js",
+      "shared/storage.js",
+      "shared/quotes.js",
+      "shared/stats.js",
+      "shared/timer.js",
+      "shared/timer-engine.js",
+      "background/service-worker.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://zenquotes.io/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "shared/fonts.css",
+        "content/styles/focus.css"
+      ],
+      "js": [
+        "shared/browser-api.js",
+        "shared/constants.js",
+        "shared/dates.js",
+        "shared/storage.js",
+        "shared/quotes.js",
+        "shared/sound.js",
+        "shared/timer.js",
+        "shared/timer-store.js",
+        "content/dom.js",
+        "content/focus-state.js",
+        "content/router.js",
+        "content/ui/toggle-button.js",
+        "content/ui/home-overlay.js",
+        "content/ui/notes-dock.js",
+        "content/video-tracker.js",
+        "content/main.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "shared/tokens.css",
+        "content/styles/components.css",
+        "assets/fonts/*.woff2"
+      ],
+      "matches": [
+        "https://www.youtube.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "focustube@cssiddheesh.in",
+      "strict_min_version": "128.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  }
+}

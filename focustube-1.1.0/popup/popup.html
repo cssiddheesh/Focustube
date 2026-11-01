@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FocusTube</title>
+  <link rel="stylesheet" href="../shared/fonts.css">
+  <link rel="stylesheet" href="../shared/tokens.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>FocusTube</h1>
+      <p class="tagline">Learn Without Distractions</p>
+    </div>
+    <button id="focus-toggle" class="toggle" type="button" aria-pressed="false" data-state="off">Focus</button>
+  </header>
+
+  <main>
+    <section class="card" aria-labelledby="timer-heading">
+      <h2 id="timer-heading">Study Timer</h2>
+      <div class="modes" role="group" aria-label="Timer mode">
+        <button type="button" data-mode="classic" aria-pressed="true">Classic <small>25 / 5</small></button>
+        <button type="button" data-mode="deep" aria-pressed="false">Deep Study <small>50 / 10</small></button>
+        <button type="button" data-mode="custom" aria-pressed="false">Custom <small>Your own</small></button>
+      </div>
+
+      <div id="custom-row" class="custom" hidden>
+        <label>Focus (min) <input id="custom-focus" type="number" min="1" max="180" inputmode="numeric"></label>
+        <label>Break (min) <input id="custom-break" type="number" min="1" max="60" inputmode="numeric"></label>
+      </div>
+
+      <div class="clock">
+        <span id="phase">Focus</span>
+        <span id="time" role="timer">25:00</span>
+      </div>
+      <div class="bar" aria-hidden="true"><div id="bar-fill"></div></div>
+
+      <div class="actions">
+        <button id="btn-start" class="btn primary" type="button">Start</button>
+        <button id="btn-reset" class="btn" type="button">Reset</button>
+        <button id="btn-skip" class="btn" type="button">Skip</button>
+      </div>
+
+      <label class="check"><input id="sound" type="checkbox" checked> Sound notification</label>
+      <p id="notice" class="notice" role="status" hidden></p>
+    </section>
+
+    <section class="card" aria-labelledby="stats-heading">
+      <h2 id="stats-heading">Focus Statistics</h2>
+      <p id="streak" class="streak">&#128293; 0 Day Streak</p>
+      <dl class="stats">
+        <div><dt>Today's Study Time</dt><dd id="stat-today">0m</dd></div>
+        <div><dt>Weekly Study Time</dt><dd id="stat-week">0m</dd></div>
+        <div><dt>Sessions Today</dt><dd id="stat-sessions-today">0</dd></div>
+        <div><dt>Sessions This Week</dt><dd id="stat-sessions-week">0</dd></div>
+        <div><dt>Sessions This Month</dt><dd id="stat-sessions-month">0</dd></div>
+        <div><dt>Total Sessions</dt><dd id="stat-total">0</dd></div>
+        <div><dt>Videos Completed</dt><dd id="stat-videos">0</dd></div>
+        <div><dt>Best Streak</dt><dd id="stat-best">0 Days</dd></div>
+      </dl>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>By C S Siddheesh</span>
+    <nav aria-label="Developer links">
+      <a href="https://github.com/cssiddheesh" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://instagram.com/cssiddheesh" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://cssiddheesh.in" target="_blank" rel="noopener noreferrer">Website</a>
+      <a href="https://cssiddheesh.in/bio" target="_blank" rel="noopener noreferrer">Bio</a>
+    </nav>
+  </footer>
+
+  <script src="../shared/browser-api.js"></script>
+  <script src="../shared/constants.js"></script>
+  <script src="../shared/dates.js"></script>
+  <script src="../shared/storage.js"></script>
+  <script src="../shared/stats.js"></script>
+  <script src="../shared/sound.js"></script>
+  <script src="../shared/timer.js"></script>
+  <script src="../shared/timer-store.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

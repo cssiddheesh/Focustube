@@ -1,0 +1,119 @@
+/*
+ * FocusTube - page cleanup rules.
+ *
+ * Every rule is scoped to html[data-focustube="on"] (the master Focus switch)
+ * AND to its own feature: html[data-focustube-off] lists the features the user
+ * switched off in Settings, so ":not([data-focustube-off~="shorts"])" means
+ * "the Shorts feature is enabled". Switching anything is instant, no DOM work.
+ *
+ * YouTube changes its markup often: if a distraction reappears, this is the
+ * only file that needs a fix.
+ */
+
+/* ---- Focus homepage: hide the feed (our overlay replaces it) ---- */
+html[data-focustube="on"]:not([data-focustube-off~="homefocus"]) ytd-browse[page-subtype="home"] {
+  display: none !important;
+}
+
+/* The official search bar moves to the middle of the focus homepage.
+   JS publishes the target position as CSS variables (home-overlay.js). */
+html[data-focustube-home="active"] ytd-masthead #center {
+  position: fixed !important;
+  top: var(--ft-search-top, 300px) !important;
+  left: var(--ft-search-left, 50%) !important;
+  width: var(--ft-search-width, 560px) !important;
+  max-width: none !important;
+  flex: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 2100 !important;
+}
+
+/* ---- Shorts ---- */
+html[data-focustube="on"]:not([data-focustube-off~="shorts"]) :is(
+  ytd-rich-shelf-renderer[is-shorts],
+  ytd-reel-shelf-renderer,
+  grid-shelf-view-model,
+  ytd-guide-entry-renderer:has(a[href^="/shorts"]),
+  ytd-guide-entry-renderer:has(a[title="Shorts"]),
+  ytd-mini-guide-entry-renderer:has(a[href^="/shorts"]),
+  ytd-mini-guide-entry-renderer:has(a[title="Shorts"]),
+  ytd-mini-guide-entry-renderer[aria-label="Shorts"],
+  ytd-mini-guide-entry-renderer:has([aria-label="Shorts"]),
+  yt-tab-shape[tab-title="Shorts"]
+) {
+  display: none !important;
+}
+
+/* ---- Community posts and trending ---- */
+html[data-focustube="on"]:not([data-focustube-off~="community"]) :is(
+  ytd-browse[page-subtype="trending"],
+  ytd-guide-entry-renderer:has(a[href^="/feed/trending"]),
+  ytd-backstage-post-thread-renderer,
+  ytd-post-renderer,
+  yt-tab-shape[tab-title="Community"],
+  yt-tab-shape[tab-title="Posts"]
+) {
+  display: none !important;
+}
+
+/* ---- Watch page: recommended / related videos ---- */
+html[data-focustube="on"]:not([data-focustube-off~="related"]) :is(
+  ytd-watch-flexy #related,
+  ytd-watch-next-secondary-results-renderer
+) {
+  display: none !important;
+}
+/* Hide the right column unless it holds a playlist (playlists are kept). */
+html[data-focustube="on"]:not([data-focustube-off~="related"]) ytd-watch-flexy #secondary:not(:has(ytd-playlist-panel-renderer)) {
+  display: none !important;
+}
+
+/* ---- Watch page: comments ---- */
+html[data-focustube="on"]:not([data-focustube-off~="comments"]) :is(
+  ytd-watch-flexy #comments,
+  ytd-comments,
+  ytd-watch-flexy ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-comments-section"]
+) {
+  display: none !important;
+}
+
+/* ---- Watch page: live chat and chat replay ---- */
+html[data-focustube="on"]:not([data-focustube-off~="livechat"]) :is(
+  ytd-live-chat-frame,
+  ytd-watch-flexy #chat
+) {
+  display: none !important;
+}
+
+/* ---- Merch, donations, promo banners and subscribe prompts ---- */
+html[data-focustube="on"]:not([data-focustube-off~="promos"]) :is(
+  ytd-merch-shelf-renderer,
+  ytd-donation-shelf-renderer,
+  ytd-statement-banner-renderer,
+  ytd-mealbar-promo-renderer
+) {
+  display: none !important;
+}
+
+/* ---- Fullscreen / player cleanup ----
+   Removes end screens, suggested-video grids and popups.
+   Captions, controls and chapters are intentionally not listed. */
+html[data-focustube="on"]:not([data-focustube-off~="fullscreen"]) :is(
+  .html5-endscreen,
+  .ytp-endscreen-content,
+  .ytp-ce-element,
+  .ytp-ce-covering-overlay,
+  .ytp-fullscreen-grid,
+  .ytp-fullscreen-grid-stills-container,
+  .ytp-videowall-still,
+  .ytp-suggestion-set,
+  .ytp-pause-overlay,
+  .ytp-pause-overlay-container,
+  .ytp-cards-teaser,
+  .ytp-suggested-action,
+  .ytp-paid-content-overlay,
+  .iv-branding
+) {
+  display: none !important;
+}

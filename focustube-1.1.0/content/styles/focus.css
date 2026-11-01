@@ -1,0 +1,70 @@
+/*
+ * FocusTube - page cleanup rules.
+ *
+ * Everything is scoped to html[data-focustube="on"], so turning Focus Mode
+ * off restores YouTube instantly with no DOM work. YouTube changes its markup
+ * often: if a distraction reappears, this is the only file that needs a fix.
+ * Selectors are grouped by PRD feature.
+ */
+
+/* ---- Feature 2: Focus Homepage (feed, Shorts, community, trending) ---- */
+html[data-focustube="on"] ytd-browse[page-subtype="home"],
+html[data-focustube="on"] ytd-browse[page-subtype="trending"],
+html[data-focustube="on"] ytd-rich-shelf-renderer[is-shorts],
+html[data-focustube="on"] ytd-reel-shelf-renderer,
+html[data-focustube="on"] grid-shelf-view-model,
+html[data-focustube="on"] ytd-guide-entry-renderer:has(a[title="Shorts"]),
+html[data-focustube="on"] ytd-mini-guide-entry-renderer[aria-label="Shorts"],
+html[data-focustube="on"] ytd-guide-entry-renderer:has(a[href^="/feed/trending"]),
+html[data-focustube="on"] ytd-backstage-post-thread-renderer,
+html[data-focustube="on"] ytd-post-renderer,
+html[data-focustube="on"] yt-tab-shape[tab-title="Shorts"],
+html[data-focustube="on"] yt-tab-shape[tab-title="Community"],
+html[data-focustube="on"] yt-tab-shape[tab-title="Posts"] {
+  display: none !important;
+}
+
+/* ---- Feature 4: Clean Watch Page ---- */
+/* Recommended / related videos */
+html[data-focustube="on"] ytd-watch-flexy #related,
+html[data-focustube="on"] ytd-watch-next-secondary-results-renderer,
+/* Comments */
+html[data-focustube="on"] ytd-watch-flexy #comments,
+html[data-focustube="on"] ytd-comments,
+/* Live chat and chat replay */
+html[data-focustube="on"] ytd-live-chat-frame,
+html[data-focustube="on"] ytd-watch-flexy #chat,
+/* Merchandise, donations, promos, subscribe prompts */
+html[data-focustube="on"] ytd-merch-shelf-renderer,
+html[data-focustube="on"] ytd-donation-shelf-renderer,
+html[data-focustube="on"] ytd-statement-banner-renderer,
+html[data-focustube="on"] ytd-mealbar-promo-renderer,
+html[data-focustube="on"] ytd-popup-container ytd-mealbar-promo-renderer,
+html[data-focustube="on"] ytd-watch-flexy ytd-engagement-panel-section-list-renderer[target-id="engagement-panel-comments-section"] {
+  display: none !important;
+}
+
+/* Hide the right column unless it holds a playlist (playlists are kept). */
+html[data-focustube="on"] ytd-watch-flexy #secondary:not(:has(ytd-playlist-panel-renderer)) {
+  display: none !important;
+}
+
+/* ---- Feature 5: Fullscreen / player cleanup ---- */
+/* Removes end screens, suggested-video grids and popups.
+   Captions, controls and chapters are intentionally not listed here. */
+html[data-focustube="on"] .html5-endscreen,
+html[data-focustube="on"] .ytp-endscreen-content,
+html[data-focustube="on"] .ytp-ce-element,
+html[data-focustube="on"] .ytp-ce-covering-overlay,
+html[data-focustube="on"] .ytp-fullscreen-grid,
+html[data-focustube="on"] .ytp-fullscreen-grid-stills-container,
+html[data-focustube="on"] .ytp-videowall-still,
+html[data-focustube="on"] .ytp-suggestion-set,
+html[data-focustube="on"] .ytp-pause-overlay,
+html[data-focustube="on"] .ytp-pause-overlay-container,
+html[data-focustube="on"] .ytp-cards-teaser,
+html[data-focustube="on"] .ytp-suggested-action,
+html[data-focustube="on"] .ytp-paid-content-overlay,
+html[data-focustube="on"] .iv-branding {
+  display: none !important;
+}

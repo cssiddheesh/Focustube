@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "FocusTube",
+    "description": "Extension name."
+  },
+  "extDescription": {
+    "message": "Learn without distractions. Turn YouTube into a calm study space with a Pomodoro timer, quick notes and study streaks.",
+    "description": "Extension description shown in browser stores (max 132 characters)."
+  },
+  "actionTitle": {
+    "message": "FocusTube",
+    "description": "Tooltip for the toolbar button."
+  }
+}
